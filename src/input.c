@@ -119,7 +119,7 @@ void getTleFilePath(const char* defaultFilePath, char* filePath, size_t filePath
 	{
 		// If ENTER was pressed, use default.  Otherwise,
 		// try to convert.
-		if (buf[0] != '\n' && sscanf_s(buf, "%s", &tempInput) > 0)
+		if (buf[0] != '\n' && sscanf_s(buf, "%s", &tempInput, 256) > 0)
 		{
 			strcpy_s(filePath, filePathLength, tempInput);
 		}
