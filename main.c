@@ -1,7 +1,9 @@
 ﻿// main.c : Defines the entry point for the application.
-#include "stdio.h"
 
+#include "stdlib.h"
+#include "stdio.h"
 #include "input.h"
+#include "tle.h"
 
 int main()
 {
@@ -19,7 +21,12 @@ int main()
     const time_t epochDateTime = getUserEpochDateTime(defaultEpochDateTime);
     getTleFilePath(defaultFilePath, filePath, sizeof filePath);
 
-	// Get TLE data for Satellites
+	// Get the number of valid TLE records in the file
+    const size_t tleRecordCount = getTleRecordCount(filePath);
+
+    // Create the TLE Record buffer and read all data
+    tleRecord_t* tleRecords = malloc(sizeof(tleRecord_t) * tleRecordCount);
+    readTleData(filePath, tleRecords, tleRecordCount);
 
     // If sufficient input is found, compute the visible satellites and their
     // applicable Doppler shifts
