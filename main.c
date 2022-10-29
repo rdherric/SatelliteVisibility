@@ -1,5 +1,5 @@
 ﻿// main.c : Defines the entry point for the application.
-#include <stdio.h>
+#include "stdio.h"
 
 #include "input.h"
 

@@ -1,10 +1,10 @@
 // Created by Robert Herrick, KI0RDH on 10/28/2022.
 // C implementation file for functions defined in `input.h`.  Contains
 // functions necessary to get user input to operate the application.
-#include "stdio.h"
-#include "input.h"
 
-#include <string.h>
+#include "stdio.h"
+#include "string.h"
+#include "input.h"
 
 /**
  * \brief getUserLatitude prompts the user for the Latitude at which to find visible satellites.
@@ -105,7 +105,7 @@ time_t getUserEpochDateTime(time_t defaultEpochDateTime)
  * \param filePath A buffer to hold a file path if the user enters one.
  * \param filePathLength The length of the char* in defaultFilePath in case it needs to be cleared.
  */
-void getTleFilePath(const char* defaultFilePath, char* filePath, int filePathLength)
+void getTleFilePath(const char* defaultFilePath, char* filePath, size_t filePathLength)
 {
 	// Variables
 	char buf[256];
