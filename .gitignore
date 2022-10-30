@@ -1,6 +1,8 @@
 # Output directories
 .vs/
+.idea/
 out/
+cmake-build-debug/
 
 # Prerequisites
 *.d
