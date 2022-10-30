@@ -2,8 +2,9 @@
 // C implementation file for functions defined in `input.h`.  Contains
 // functions necessary to get user input to operate the application.
 
-#include "stdio.h"
-#include "string.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include "input.h"
 
 /**
@@ -26,9 +27,16 @@ double getUserLatitude(double defaultLatitude)
 	{
 		// If ENTER was pressed, use default.  Otherwise,
 		// try to convert.
-		if (buf[0] != '\n' && sscanf_s(buf, "%lf", &tempInput) > 0)
+		if (buf[0] != '\n')
 		{
-			rtn = tempInput;
+            // Convert to a double
+            tempInput = strtod(buf, NULL);
+
+            // If the value is valid, return it
+            if (tempInput != 0)
+            {
+                rtn = tempInput;
+            }
 		}
 	}
 
@@ -55,12 +63,19 @@ double getUserLongitude(double defaultLongitude)
 	// Get input into temp variable - assign if valid
 	if (fgets(buf, sizeof buf, stdin) != NULL)
 	{
-		// If ENTER was pressed, use default.  Otherwise,
-		// try to convert.
-		if (buf[0] != '\n' && sscanf_s(buf, "%lf", &tempInput) > 0)
-		{
-			rtn = tempInput;
-		}
+        // If ENTER was pressed, use default.  Otherwise,
+        // try to convert.
+        if (buf[0] != '\n')
+        {
+            // Convert to a double
+            tempInput = strtod(buf, NULL);
+
+            // If the value is valid, return it
+            if (tempInput != 0)
+            {
+                rtn = tempInput;
+            }
+        }
 	}
 
 	// Return the result
@@ -86,12 +101,19 @@ time_t getUserEpochDateTime(time_t defaultEpochDateTime)
 	// Get input into temp variable - assign if valid
 	if (fgets(buf, sizeof buf, stdin) != NULL)
 	{
-		// If ENTER was pressed, use default.  Otherwise,
-		// try to convert.
-		if (buf[0] != '\n' && sscanf_s(buf, "%lld", &tempInput) > 0)
-		{
-			rtn = tempInput;
-		}
+        // If ENTER was pressed, use default.  Otherwise,
+        // try to convert.
+        if (buf[0] != '\n')
+        {
+            // Convert to a double
+            tempInput = strtoll(buf, NULL, 10);
+
+            // If the value is valid, return it
+            if (tempInput != 0)
+            {
+                rtn = tempInput;
+            }
+        }
 	}
 
 	// Return the result
@@ -103,13 +125,11 @@ time_t getUserEpochDateTime(time_t defaultEpochDateTime)
  * \brief getTleFilePath prompts the user for the path to the TLE file with satellite information.
  * \param defaultFilePath The default value for the TLE file path so that no entry is necessary.
  * \param filePath A buffer to hold a file path if the user enters one.
- * \param filePathLength The length of the char* in defaultFilePath in case it needs to be cleared.
  */
-void getTleFilePath(const char* defaultFilePath, char* filePath, size_t filePathLength)
+void getTleFilePath(const char* defaultFilePath, char* filePath)
 {
 	// Variables
 	char buf[256];
-	char tempInput[256];
 
 	// Request file path, showing default value
 	printf("Enter Two-Line Element File Path [%s]: ", defaultFilePath);
@@ -118,14 +138,14 @@ void getTleFilePath(const char* defaultFilePath, char* filePath, size_t filePath
 	if (fgets(buf, sizeof buf, stdin) != NULL)
 	{
 		// If ENTER was pressed, use default.  Otherwise,
-		// try to convert.
-		if (buf[0] != '\n' && sscanf_s(buf, "%s", &tempInput, 256) > 0)
+		// return the input.
+		if (buf[0] != '\n')
 		{
-			strcpy_s(filePath, filePathLength, tempInput);
+			strcpy(filePath, buf);
 		}
 		else
 		{
-			strcpy_s(filePath, filePathLength, defaultFilePath);
+			strcpy(filePath, defaultFilePath);
 		}
 	}
 }

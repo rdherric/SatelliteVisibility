@@ -1,7 +1,7 @@
 ﻿// main.c : Defines the entry point for the application.
 
-#include "stdlib.h"
-#include "stdio.h"
+#include <stdlib.h>
+#include <stdio.h>
 #include "input.h"
 #include "tle.h"
 
@@ -19,7 +19,7 @@ int main()
     const double latitude = getUserLatitude(defaultLatitude);
     const double longitude = getUserLongitude(defaultLongitude);
     const time_t epochDateTime = getUserEpochDateTime(defaultEpochDateTime);
-    getTleFilePath(defaultFilePath, filePath, sizeof filePath);
+    getTleFilePath(defaultFilePath, filePath);
 
 	// Get the number of valid TLE records in the file
     const size_t tleRecordCount = getTleRecordCount(filePath);
