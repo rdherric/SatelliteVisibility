@@ -125,8 +125,9 @@ time_t getUserEpochDateTime(time_t defaultEpochDateTime)
  * \brief getTleFilePath prompts the user for the path to the TLE file with satellite information.
  * \param defaultFilePath The default value for the TLE file path so that no entry is necessary.
  * \param filePath A buffer to hold a file path if the user enters one.
+ * \param filePathLength The length of the char* in filePath for copy.
  */
-void getTleFilePath(const char* defaultFilePath, char* filePath)
+void getTleFilePath(const char* defaultFilePath, char* filePath, size_t filePathLength)
 {
 	// Variables
 	char buf[256];
@@ -141,7 +142,7 @@ void getTleFilePath(const char* defaultFilePath, char* filePath)
 		// return the input.
 		if (buf[0] != '\n')
 		{
-			strcpy(filePath, buf);
+			strncpy(filePath, buf, filePathLength);
 		}
 		else
 		{

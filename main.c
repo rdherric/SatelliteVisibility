@@ -19,7 +19,7 @@ int main()
     const double latitude = getUserLatitude(defaultLatitude);
     const double longitude = getUserLongitude(defaultLongitude);
     const time_t epochDateTime = getUserEpochDateTime(defaultEpochDateTime);
-    getTleFilePath(defaultFilePath, filePath);
+    getTleFilePath(defaultFilePath, filePath, 256);
 
 	// Get the number of valid TLE records in the file
     const size_t tleRecordCount = getTleRecordCount(filePath);

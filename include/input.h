@@ -14,6 +14,6 @@
 double getUserLatitude(double defaultLatitude);
 double getUserLongitude(double defaultLongitude);
 time_t getUserEpochDateTime(time_t defaultEpochDateTime);
-void getTleFilePath(const char* defaultFilePath, char* filePath);
+void getTleFilePath(const char* defaultFilePath, char* filePath, size_t filePathLength);
 
 #endif //SATELLITEVISIBILITY_INPUT_H
