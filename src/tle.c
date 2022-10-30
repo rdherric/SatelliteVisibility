@@ -15,7 +15,7 @@
  */
 void copyString(char* destination, char* source, size_t maxLength)
 {
-    // Reset all momory to the null-termination character
+    // Reset all memory to the null-termination character
     memset(destination, '\0', maxLength);
 
     // Copy as much of the string as possible
