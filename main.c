@@ -37,5 +37,32 @@ int main()
     printf("Epoch DateTime: %lld\n", epochDateTime);
     printf("File Path: %s\n", filePath);
 
+    for (int i = 0; i < tleRecordCount; i++)
+    {
+        printf("%s (%s / %s) - %s: %s => %s / %s\n",
+               tleRecords[i].satelliteName,
+               tleRecords[i].catalogNumber,
+               tleRecords[i].internationalDesignator,
+               tleRecords[i].ephemerisEpochYear,
+               tleRecords[i].ephemerisEpochDay,
+               tleRecords[i].elementSetNumber,
+               tleRecords[i].epochRevolutionNumber);
+
+        printf("----- %s : %s : %s\n",
+               tleRecords[i].meanMotion1stDerivative,
+               tleRecords[i].meanMotion2ndDerivative,
+               tleRecords[i].bStarDragTerm);
+
+        printf("+++++ %s : %s : %s\n",
+               tleRecords[i].inclination,
+               tleRecords[i].rightAscension,
+               tleRecords[i].eccentricity);
+        printf("+++++ %s : %s : %s\n",
+               tleRecords[i].argumentOfPerigee,
+               tleRecords[i].meanAnomaly,
+               tleRecords[i].meanMotion);
+    }
+
     // Return 0 to indicate success
+    return 0;
 }

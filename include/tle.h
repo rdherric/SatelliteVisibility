@@ -6,7 +6,7 @@
 #ifndef SATELLITEVISIBILITY_TLE_H
 #define SATELLITEVISIBILITY_TLE_H
 
-#include "stdint.h"
+#include <stdint.h>
 
 /****************************************************************************/
 /* Structs necessary to pass around associated data related to Satellite    */
@@ -19,30 +19,29 @@
 typedef struct
 {
     // Satellite user-friendly properties
-    char satelliteName[24];
-    char catalogNumber[5];
-    char classification;
-    char internationalDesignator[8];
+    char satelliteName[25];
+    char catalogNumber[7];
+    char internationalDesignator[9];
 
     // Ephemeris dates
-    char ephemerisEpochYear[2];
-    char ephemerisEpochDay[12];
+    char ephemerisEpochYear[3];
+    char ephemerisEpochDay[13];
 
     // Ephemeris motion data
-    char meanMotion1stDerivative[10];
-    char meanMotion2ndDerivative[8];
-    char bStarDragTerm[8];
-    char inclination[8];
-    char rightAscension[8];
-    char eccentricity[7];
-    char argumentOfPerigee[8];
-    char meanAnomaly[8];
-    char meanMotion[11];
+    char meanMotion1stDerivative[11];
+    char meanMotion2ndDerivative[9];
+    char bStarDragTerm[9];
+    char inclination[9];
+    char rightAscension[9];
+    char eccentricity[8];
+    char argumentOfPerigee[9];
+    char meanAnomaly[9];
+    char meanMotion[12];
 
     // TLE data
-	char ephemerisType[1];
-    char elementSetNumber[4];
-    char epochRevolutionNumber[5];
+	char ephemerisType[2];
+    char elementSetNumber[5];
+    char epochRevolutionNumber[6];
 } tleRecord_t;
 
 
