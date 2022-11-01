@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "input.h"
+#include "satellite.h"
 #include "tle.h"
 
 int main()
@@ -28,8 +29,11 @@ int main()
     tleRecord_t* tleRecords = malloc(sizeof(tleRecord_t) * tleRecordCount);
     readTleData(filePath, tleRecords, tleRecordCount);
 
-    // If sufficient input is found, compute the visible satellites and their
-    // applicable Doppler shifts
+    // Compute the visible satellites from the location on Earth and the
+    // time that was input.  For satellites that are visible, compute any
+    // applicable Doppler shifts based on the motion of the satellite relative
+    // to the location of the user.
+    computeSatelliteVisibility(tleRecords, latitude, longitude, epochDateTime);
 
     // Write out the visible satellites to the console
     printf("Latitude: %f\n", latitude);
@@ -37,30 +41,24 @@ int main()
     printf("Epoch DateTime: %lld\n", epochDateTime);
     printf("File Path: %s\n", filePath);
 
+    // Write out the visible Satellites to the console
+    printf("\nVisible Satellites:\n");
     for (int i = 0; i < tleRecordCount; i++)
     {
-        printf("%s (%s / %s) - %s: %s => %s / %s\n",
+        // If the Satellite is visible, print its properties
+
+        // Satellite name and Designator
+        printf("%s (%s / %s):\n",
                tleRecords[i].satelliteName,
                tleRecords[i].catalogNumber,
-               tleRecords[i].internationalDesignator,
-               tleRecords[i].ephemerisEpochYear,
-               tleRecords[i].ephemerisEpochDay,
-               tleRecords[i].elementSetNumber,
-               tleRecords[i].epochRevolutionNumber);
+               tleRecords[i].internationalDesignator);
 
-        printf("----- %s : %s : %s\n",
-               tleRecords[i].meanMotion1stDerivative,
-               tleRecords[i].meanMotion2ndDerivative,
-               tleRecords[i].bStarDragTerm);
-
-        printf("+++++ %s : %s : %s\n",
-               tleRecords[i].inclination,
-               tleRecords[i].rightAscension,
-               tleRecords[i].eccentricity);
-        printf("+++++ %s : %s : %s\n",
-               tleRecords[i].argumentOfPerigee,
-               tleRecords[i].meanAnomaly,
-               tleRecords[i].meanMotion);
+        // Satellite frequency properties
+        printf("\tBase Rx:\t%u\tBase Tx: %u \n\tDoppler Shifted Rx: %u\tDoppler Shifted Tx: %u\n\n",
+               tleRecords[i].receiveFrequency,
+               tleRecords[i].transmitFrequency,
+               tleRecords[i].actualReceiveFrequency,
+               tleRecords[i].actualTransmitFrequency);
     }
 
     // Return 0 to indicate success

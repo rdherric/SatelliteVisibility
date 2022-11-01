@@ -6,6 +6,7 @@
 #ifndef SATELLITEVISIBILITY_TLE_H
 #define SATELLITEVISIBILITY_TLE_H
 
+#include <stdbool.h>
 #include <stdint.h>
 
 /****************************************************************************/
@@ -42,6 +43,21 @@ typedef struct
 	char ephemerisType[2];
     char elementSetNumber[5];
     char epochRevolutionNumber[6];
+
+    // Satellite visibility properties - this will change as the satellite
+    // moves in space - it is valid only after performing the computation
+    // for a specific latitude, longitude, and time
+    bool isVisible;
+
+    // Base Satellite radio properties
+    uint32_t receiveFrequency;
+    uint32_t transmitFrequency;
+    uint16_t receiveCTCSSFrequency;
+    uint16_t transmitCTCSSFrequency;
+
+    // Doppler-shifted Satellite radio properties
+    uint32_t actualReceiveFrequency;
+    uint32_t actualTransmitFrequency;
 } tleRecord_t;
 
 
